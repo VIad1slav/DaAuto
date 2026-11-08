@@ -193,12 +193,18 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .field-row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 14px; }
 .card-form__note { margin: 0; font-size: 12px; color: var(--muted); text-align: center; line-height: 1.45; }
 .card-form__ok { position: absolute; inset: 0; border-radius: inherit; background: inherit; display: grid; place-content: center; justify-items: center; gap: 14px; text-align: center; padding: 30px;
-  opacity: 0; visibility: hidden; transition: opacity .4s, visibility .4s; }
-.card-form__ok svg { width: 64px; height: 64px; padding: 14px; border-radius: 50%; background: #E7F8EE; stroke: #16A34A; stroke-width: 2.6; fill: none; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 30; stroke-dashoffset: 30; }
+  overflow: hidden; opacity: 0; visibility: hidden; transition: opacity .4s, visibility .4s; }
+/* полоска внизу: показывает, сколько осталось до возврата формы (2 с) */
+.card-form__ok::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 4px; background: #16A34A; transform-origin: left; transform: scaleX(0); }
+.card-form__ok svg { width: 64px; height: 64px; padding: 14px; border-radius: 50%; background: #E7F8EE; stroke: #16A34A; stroke-width: 2.6; fill: none; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 30; stroke-dashoffset: 30; transition: stroke-dashoffset 0s .4s; }
 .card-form__ok p { font-weight: 700; font-size: 17px; max-width: 280px; margin: 0; }
 .card-form.is-sent .card-form__ok { opacity: 1; visibility: visible; }
-.card-form.is-sent .card-form__ok svg { animation: draw .6s .2s var(--ease) forwards; }
-@keyframes draw { to { stroke-dashoffset: 0; } }
+.card-form__ok p { opacity: 0; transform: translateY(10px); transition: opacity .4s .15s, transform .4s .15s var(--ease); }
+.card-form.is-sent .card-form__ok svg { stroke-dashoffset: 0; transition: stroke-dashoffset .6s .2s var(--ease); animation: ok-pop .45s var(--ease) both; }
+.card-form.is-sent .card-form__ok p { opacity: 1; transform: none; }
+.card-form.is-sent .card-form__ok::after { animation: ok-timer 2s linear forwards; }
+@keyframes ok-pop { from { transform: scale(.4); opacity: 0; } 70% { transform: scale(1.08); opacity: 1; } to { transform: scale(1); } }
+@keyframes ok-timer { from { transform: scaleX(1); } to { transform: scaleX(0); } }
 
 .card-form--blue { background: linear-gradient(150deg, var(--blue) 0%, #1442C4 100%); color: #fff; }
 .card-form--blue .field > span { color: rgba(255,255,255,.85); }

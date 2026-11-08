@@ -6,3 +6,18 @@ daauto-site/config.php
 Thumbs.db
 desktop.ini
 .DS_Store
+
+# Заявки и подключённые чаты бота — только на сервере
+daauto-site/data/*
+!daauto-site/data/.htaccess
+
+# Проверка бота на компьютере: портативный PHP, тестовые заявки, лог
+dev/php/
+dev/data/
+dev/*.log
+
+# Программа туннеля (скачивается отдельно, ~55 МБ)
+dev/cloudflared.exe
+
+# Кэш Python
+__pycache__/

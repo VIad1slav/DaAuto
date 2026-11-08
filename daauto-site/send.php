@@ -1,16 +1,19 @@
 <?php
 /**
- * DaAuto — отправка заявок с сайта в Telegram.
+ * DaAuto — приём заявок с сайта.
  *
- * Токен бота и chat_id берутся из config.php (образец — config.example.php)
- * или из переменных окружения TG_BOT_TOKEN / TG_CHAT_ID.
- * Токен остаётся на сервере и не виден посетителям сайта.
+ * Сохраняет заявку в data/store.php и отправляет карточку с кнопками статуса
+ * во все подключённые чаты Telegram (см. bot.php и README.md).
+ * Токен бота остаётся на сервере и не виден посетителям сайта.
  */
+define('DAAUTO', 1);
+require __DIR__ . '/lib/core.php';
 
 header('Content-Type: application/json; charset=utf-8');
 header('X-Content-Type-Options: nosniff');
 
-function reply(int $code, array $data): void {
+function reply(int $code, array $data): void
+{
     http_response_code($code);
     echo json_encode($data, JSON_UNESCAPED_UNICODE);
     exit;
@@ -19,12 +22,7 @@ function reply(int $code, array $data): void {
 if (($_SERVER['REQUEST_METHOD'] ?? '') !== 'POST') {
     reply(405, ['ok' => false, 'error' => 'method']);
 }
-
-/* ---------- настройки ---------- */
-$config = is_file(__DIR__ . '/config.php') ? (require __DIR__ . '/config.php') : [];
-$token  = (string)(($config['bot_token'] ?? '') ?: (getenv('TG_BOT_TOKEN') ?: ''));
-$chatId = (string)(($config['chat_id']   ?? '') ?: (getenv('TG_CHAT_ID')   ?: ''));
-if ($token === '' || $chatId === '') {
+if (cfg('bot_token') === '') {
     reply(500, ['ok' => false, 'error' => 'not_configured']);
 }
 
@@ -55,107 +53,105 @@ if ($get('website', 100) !== '') {
     reply(200, ['ok' => true]);
 }
 
-$name    = $get('name', 100);
-$phone   = $get('phone', 40);
-$service = $get('service', 40);
-$lang    = $get('language', 5);
-$pageLng = $get('page_lang', 5);
-$message = mb_substr(trim((string)($data['message'] ?? '')), 0, 1500);
+$fields = [
+    'name'      => $get('name', 100),
+    'phone'     => $get('phone', 40),
+    'service'   => $get('service', 40),
+    'language'  => $get('language', 5),
+    'page_lang' => $get('page_lang', 5),
+    'message'   => mb_substr(trim(isset($data['message']) && is_scalar($data['message']) ? (string)$data['message'] : ''), 0, 1500),
+];
 
-$digits = preg_replace('/\D/', '', $phone);
-if (mb_strlen($name) < 2 || strlen($digits) < 9 || strlen($digits) > 15) {
+$digits = preg_replace('/\D/', '', $fields['phone']);
+if (mb_strlen($fields['name']) < 2 || strlen($digits) < 9 || strlen($digits) > 15) {
     reply(422, ['ok' => false, 'error' => 'validation']);
 }
 
-/* ---------- не больше 5 заявок с одного IP за 10 минут ---------- */
+/* ---------- не больше 5 заявок с одного IP за 10 минут ----------
+   Считаются только доставленные заявки: неудачные попытки (ошибка настройки,
+   нет связи с Telegram) лимит не расходуют. */
 $ip     = $_SERVER['REMOTE_ADDR'] ?? 'unknown';
 $rlFile = sys_get_temp_dir() . '/daauto_rl_' . md5($ip);
 $now    = time();
 $hits   = [];
+$rlOff  = getenv('DAAUTO_NO_RATE_LIMIT') === '1'; // только для проверки на компьютере (dev/)
 if (is_file($rlFile)) {
     $hits = array_filter(
         array_map('intval', explode(',', (string)file_get_contents($rlFile))),
-        static fn($t) => $t > $now - 600
+        static function ($t) use ($now) { return $t > $now - 600; }
     );
 }
-if (count($hits) >= 5) {
+if (!$rlOff && count($hits) >= 5) {
     reply(429, ['ok' => false, 'error' => 'rate_limit']);
 }
-$hits[] = $now;
-@file_put_contents($rlFile, implode(',', $hits), LOCK_EX);
 
-/* ---------- текст сообщения ---------- */
-$services = [
-    'europe'       => 'Покупка авто у европейского дилера',
-    'selection'    => 'Автоподбор по Польше',
-    'inspection'   => 'Техосмотр',
-    'registration' => 'Регистрация и номера (Варшава)',
-    'delivery'     => 'Доставка по Европе',
-    'insurance'    => 'Страхование',
-];
-$langs = ['ru' => 'русский', 'pl' => 'польский'];
-$e = static fn(string $s): string => htmlspecialchars($s, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
-
-$lines = [
-    '🚗 <b>Новая заявка с сайта DaAuto</b>',
-    '',
-    '👤 <b>Имя:</b> ' . $e($name),
-    '📞 <b>Телефон:</b> ' . $e($phone),
-    '🛠 <b>Услуга:</b> ' . $e($services[$service] ?? ($service !== '' ? $service : '—')),
-];
-if ($lang !== '') {
-    $lines[] = '🗣 <b>Язык общения:</b> ' . $e($langs[$lang] ?? $lang);
-} elseif ($pageLng !== '') {
-    $lines[] = '🗣 <b>Язык сайта:</b> ' . $e($langs[$pageLng] ?? $pageLng);
-}
-if ($message !== '') {
-    $lines[] = '💬 <b>Комментарий:</b> ' . $e($message);
-}
-$lines[] = '';
-$lines[] = '🕒 ' . (new DateTime('now', new DateTimeZone('Europe/Warsaw')))->format('d.m.Y H:i');
-
-$payload = [
-    'chat_id'                  => $chatId,
-    'text'                     => implode("\n", $lines),
-    'parse_mode'               => 'HTML',
-    'disable_web_page_preview' => true,
-];
-
-/* ---------- отправка в Telegram ---------- */
-$url  = 'https://api.telegram.org/bot' . $token . '/sendMessage';
-$body = json_encode($payload, JSON_UNESCAPED_UNICODE);
-
-if (function_exists('curl_init')) {
-    $ch = curl_init($url);
-    curl_setopt_array($ch, [
-        CURLOPT_POST           => true,
-        CURLOPT_POSTFIELDS     => $body,
-        CURLOPT_HTTPHEADER     => ['Content-Type: application/json'],
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_TIMEOUT        => 10,
-    ]);
-    $res  = curl_exec($ch);
-    $code = (int)curl_getinfo($ch, CURLINFO_HTTP_CODE);
-    curl_close($ch);
-} else {
-    $ctx = stream_context_create(['http' => [
-        'method'        => 'POST',
-        'header'        => "Content-Type: application/json\r\n",
-        'content'       => $body,
-        'timeout'       => 10,
-        'ignore_errors' => true,
-    ]]);
-    $res  = @file_get_contents($url, false, $ctx);
-    $code = 0;
-    if (isset($http_response_header[0]) && preg_match('/\s(\d{3})\s/', $http_response_header[0], $m)) {
-        $code = (int)$m[1];
+/* ---------- сохранить заявку ---------- */
+$stored = true;
+try {
+    $to = recipients(db_read());
+    if (!$to) {
+        reply(500, ['ok' => false, 'error' => 'no_recipients']);
+    }
+    $lead = db_update(static function (array &$db) use ($fields, $now): array {
+        $lead = $fields + [
+            'id'        => (int)$db['next_id'],
+            'created'   => $now,
+            'status'    => 'new',
+            'by'        => '',
+            'by_id'     => 0,
+            'status_at' => $now,
+            'history'   => [],
+            'msgs'      => [],
+        ];
+        $db['next_id'] = $lead['id'] + 1;
+        $db['leads'][] = $lead;
+        return $lead;
+    });
+} catch (Throwable $e) {
+    // Хранилище недоступно (нет прав на запись в data/ и т. п.) — заявку всё равно
+    // не теряем: шлём простую карточку без кнопок в чат из config.php.
+    error_log('DaAuto send.php: storage error: ' . $e->getMessage());
+    $stored = false;
+    $to     = cfg('chat_id') !== '' ? [cfg('chat_id')] : [];
+    $lead   = $fields + ['id' => 0, 'created' => $now, 'status' => 'new'];
+    if (!$to) {
+        reply(500, ['ok' => false, 'error' => 'storage']);
     }
 }
 
-$tg = json_decode((string)$res, true);
-if ($code !== 200 || empty($tg['ok'])) {
-    error_log('DaAuto send.php: Telegram error ' . $code . ' ' . substr((string)$res, 0, 300));
-    reply(502, ['ok' => false, 'error' => 'telegram']);
+/* ---------- отправить в Telegram ---------- */
+$sent = [];
+$gone = [];
+foreach ($to as $chat) {
+    $r = send_card($chat, $lead);
+    if (!empty($r['ok'])) {
+        $sent[] = [(string)$chat, (int)$r['result']['message_id']];
+    } elseif ((int)($r['error_code'] ?? 0) === 403 && (string)$chat !== cfg('chat_id')) {
+        $gone[] = (string)$chat; // бота заблокировали или удалили из группы
+    }
 }
 
+if ($stored && ($sent || $gone)) {
+    try {
+        db_update(static function (array &$db) use ($lead, $sent, $gone): void {
+            foreach ($gone as $c) {
+                unset($db['subs'][$c]);
+            }
+            $i = lead_index($db, (int)$lead['id']);
+            if ($i !== null) {
+                $db['leads'][$i]['msgs'] = $sent;
+            }
+        });
+    } catch (Throwable $e) {
+        error_log('DaAuto send.php: storage error: ' . $e->getMessage());
+    }
+}
+
+if (!$sent) {
+    reply(502, ['ok' => false, 'error' => 'telegram']);
+}
+if (!$rlOff) {
+    $hits[] = $now;
+    @file_put_contents($rlFile, implode(',', $hits), LOCK_EX);
+}
 reply(200, ['ok' => true]);

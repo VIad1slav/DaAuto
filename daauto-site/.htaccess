@@ -1,4 +1,5 @@
 # Закрываем служебные файлы от прямого открытия в браузере
-<FilesMatch "^(config(\.example)?\.php|README\.md)$">
+<FilesMatch "^(config(\.example)?\.php|README\.md|start-site\.bat)$">
   Require all denied
 </FilesMatch>
+# Папки lib/ и data/ закрыты своими .htaccess

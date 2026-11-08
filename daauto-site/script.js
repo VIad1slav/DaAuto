@@ -5,6 +5,7 @@
 /* Куда отправлять заявки: send.php пересылает их в Telegram
    (настройка — в README.md). Пусто — форма только показывает «Спасибо». */
 const FORM_ENDPOINT = 'send.php';
+const SENT_MS = 2000; // сколько показывать «Спасибо» после отправки
 
 /* ---------- Польский перевод (русский берётся из HTML) ---------- */
 const PL = {
@@ -379,10 +380,19 @@ const PL = {
           if (!res.ok || !out.ok) throw new Error(out.error || res.status);
         }
         form.classList.add('is-sent');
+        // через 2 секунды прячем «Спасибо» и показываем пустую форму
+        clearTimeout(form._sentTimer);
+        form._sentTimer = setTimeout(() => form.classList.remove('is-sent'), SENT_MS);
         form.reset();
         $$('select[name="language"]', form).forEach(s => { s.value = doc.lang; });
       } catch (e) {
         console.warn('DaAuto form:', e);
+        if (e.message === 'rate_limit') {
+          alert(doc.lang === 'pl'
+            ? 'Zgłoszenie zostało już wysłane — skontaktujemy się z Tobą. Kolejne możesz wysłać za 10 minut albo zadzwoń: +48 000 000 000.'
+            : 'Заявка уже отправлена — мы свяжемся с вами. Следующую можно отправить через 10 минут или позвоните: +48 000 000 000.');
+          return;
+        }
         alert(doc.lang === 'pl'
           ? 'Nie udało się wysłać zgłoszenia. Spróbuj ponownie albo zadzwoń: +48 000 000 000.'
           : 'Не удалось отправить заявку. Попробуйте ещё раз или позвоните: +48 000 000 000.');
