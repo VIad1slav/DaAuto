@@ -1,0 +1,8 @@
+# Настройки с токеном Telegram-бота — не выкладывать
+config.php
+daauto-site/config.php
+
+# Системный мусор
+Thumbs.db
+desktop.ini
+.DS_Store

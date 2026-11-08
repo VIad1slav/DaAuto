@@ -1,0 +1,581 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title data-i18n="meta.title">DaAuto — автомобили из Европы под ключ в Польше</title>
+  <meta name="description" data-i18n-content="meta.desc" content="Покупка автомобилей от европейских дилеров, доставка по Европе, техосмотр, регистрация в Варшаве и страхование. DaAuto — всё для вашего авто в Польше.">
+  <meta name="theme-color" content="#0A1424">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231E5BFF'/%3E%3Cpath d='M18 16h14c10 0 17 6.5 17 16s-7 16-17 16H18z' fill='none' stroke='%23fff' stroke-width='6'/%3E%3Cpath d='M6 26h9M4 34h11M8 42h7' stroke='%23FF5A1F' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Unbounded:wght@500;600;700;800&display=swap&subset=cyrillic,latin-ext" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="progress" aria-hidden="true"><span></span></div>
+
+<!-- ============ HEADER ============ -->
+<header class="header" id="top">
+  <div class="container header__inner">
+    <a href="#top" class="logo" aria-label="DaAuto">
+      <svg class="logo__mark" viewBox="0 0 64 64" aria-hidden="true">
+        <rect width="64" height="64" rx="14" fill="#1E5BFF"/>
+        <path d="M22 16h10c10 0 17 6.5 17 16s-7 16-17 16H22z" fill="none" stroke="#fff" stroke-width="6"/>
+        <path d="M8 26h9M5 34h12M10 42h7" stroke="#FF5A1F" stroke-width="4" stroke-linecap="round"/>
+      </svg>
+      <span class="logo__text"><b>Da</b>Auto</span>
+    </a>
+
+    <nav class="nav" id="nav">
+      <a href="#services" data-i18n="nav.services">Услуги</a>
+      <a href="#europe" data-i18n="nav.europe">Авто из ЕС</a>
+      <a href="#prices" data-i18n="nav.prices">Цены</a>
+      <a href="#delivery" data-i18n="nav.delivery">Доставка</a>
+      <a href="#insurance" data-i18n="nav.insurance">Страхование</a>
+      <a href="#contact" data-i18n="nav.contact">Контакты</a>
+    </nav>
+
+    <div class="header__actions">
+      <div class="lang" role="group" aria-label="Language">
+        <button type="button" data-lang="ru" class="is-active">RU</button>
+        <button type="button" data-lang="pl">PL</button>
+      </div>
+      <a href="tel:+48000000000" class="header__phone">+48 000 000 000</a>
+      <a href="#contact" class="btn btn--primary btn--sm header__cta" data-i18n="cta.request">Оставить заявку</a>
+      <button class="burger" type="button" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="hero__bg" aria-hidden="true"></div>
+  <div class="hero__speed" aria-hidden="true">
+    <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+  </div>
+
+  <div class="container hero__grid">
+    <div class="hero__content">
+      <span class="badge badge--glass reveal"><span class="dot"></span><span data-i18n="hero.badge">Автомобили из Европы под ключ · Польша</span></span>
+      <h1 class="hero__title reveal" data-i18n="hero.title">Автомобиль вашей мечты <span class="grad">от европейского дилера</span></h1>
+      <p class="hero__lead reveal" data-i18n="hero.lead">Подберём, привезём, поставим на учёт и застрахуем. Понятный автомобиль с прозрачной историей — по цене у нижней границы польского рынка.</p>
+      <div class="hero__btns reveal">
+        <a href="#contact" class="btn btn--accent btn--lg" data-service="europe"><span data-i18n="hero.cta1">Узнать цену под ключ</span>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a href="#services" class="btn btn--ghost btn--lg" data-i18n="hero.cta2">Наши услуги</a>
+      </div>
+      <ul class="hero__chips reveal">
+        <li data-i18n="hero.chip1">Германия</li>
+        <li data-i18n="hero.chip2">Нидерланды</li>
+        <li data-i18n="hero.chip3">Бельгия</li>
+        <li data-i18n="hero.chip4">вся Европа</li>
+      </ul>
+    </div>
+
+    <form class="card-form reveal" data-form novalidate>
+      <div class="card-form__head">
+        <h2 data-i18n="form.title">Узнайте, во сколько обойдётся машина под ключ</h2>
+        <p data-i18n="form.sub">Ответим в течение рабочего дня</p>
+      </div>
+      <label class="field">
+        <span data-i18n="form.name">Имя</span>
+        <input type="text" name="name" required autocomplete="name" data-i18n-ph="form.namePh" placeholder="Иван">
+      </label>
+      <label class="field">
+        <span data-i18n="form.phone">Телефон</span>
+        <input type="tel" name="phone" required autocomplete="tel" placeholder="+48 ___ ___ ___">
+      </label>
+      <label class="field">
+        <span data-i18n="form.service">Услуга</span>
+        <select name="service">
+          <option value="europe" data-i18n="opt.europe">Покупка авто у европейского дилера</option>
+          <option value="selection" data-i18n="opt.selection">Автоподбор по Польше</option>
+          <option value="inspection" data-i18n="opt.inspection">Техосмотр</option>
+          <option value="registration" data-i18n="opt.registration">Регистрация и номера (Варшава)</option>
+          <option value="delivery" data-i18n="opt.delivery">Доставка по Европе</option>
+          <option value="insurance" data-i18n="opt.insurance">Страхование</option>
+        </select>
+      </label>
+      <label class="hp" aria-hidden="true">Website<input type="text" name="website" tabindex="-1" autocomplete="off"></label>
+      <button class="btn btn--primary btn--block" type="submit" data-i18n="form.submit">Отправить заявку</button>
+      <p class="card-form__note" data-i18n="form.consent">Отправляя форму, вы соглашаетесь на обработку персональных данных и обратную связь.</p>
+      <div class="card-form__ok" role="status">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
+        <p data-i18n="form.ok">Спасибо! Мы свяжемся с вами в ближайшее время.</p>
+      </div>
+    </form>
+  </div>
+
+  <div class="container">
+    <div class="stats">
+      <div class="stat reveal">
+        <div class="stat__num"><span data-count="900000">0</span>+</div>
+        <p data-i18n="stat1">авто ввезено в Польшу из других стран ЕС за 2025 год</p>
+      </div>
+      <div class="stat reveal">
+        <div class="stat__num"><span data-count="50">0</span>%</div>
+        <p data-i18n="stat2">автомобилей дороже 50 000 zł, поставленных на учёт в Польше, — из другой страны ЕС</p>
+      </div>
+      <div class="stat reveal">
+        <div class="stat__num">×<span data-count="7">0</span></div>
+        <p data-i18n="stat3">во столько раз немецкий авторынок больше польского</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MARQUEE ============ -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee__track">
+    <span data-i18n="mq.1">Покупка у дилеров ЕС</span><i>◆</i>
+    <span data-i18n="mq.2">Доставка автовозом</span><i>◆</i>
+    <span data-i18n="mq.3">Техосмотр</span><i>◆</i>
+    <span data-i18n="mq.4">Регистрация в Варшаве</span><i>◆</i>
+    <span data-i18n="mq.5">Страхование</span><i>◆</i>
+    <span data-i18n="mq.6">Поддержка на родном языке</span><i>◆</i>
+    <span data-i18n="mq.1">Покупка у дилеров ЕС</span><i>◆</i>
+    <span data-i18n="mq.2">Доставка автовозом</span><i>◆</i>
+    <span data-i18n="mq.3">Техосмотр</span><i>◆</i>
+    <span data-i18n="mq.4">Регистрация в Варшаве</span><i>◆</i>
+    <span data-i18n="mq.5">Страхование</span><i>◆</i>
+    <span data-i18n="mq.6">Поддержка на родном языке</span><i>◆</i>
+  </div>
+</div>
+
+<!-- ============ SERVICES ============ -->
+<section class="section" id="services">
+  <div class="container">
+    <div class="section__head reveal">
+      <span class="kicker" data-i18n="svc.kicker">Что мы делаем</span>
+      <h2 class="h2" data-i18n="svc.title">Наши услуги</h2>
+      <p class="section__sub" data-i18n="svc.sub">Всё, что нужно автомобилю в Польше, — от покупки в Европе до номеров и страховки</p>
+    </div>
+
+    <div class="services">
+      <a href="#europe" class="svc svc--wide reveal" style="--img:url('https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=1200&q=70')">
+        <span class="svc__num">01</span>
+        <div class="svc__body">
+          <h3 data-i18n="s1.t">Покупка авто от европейских дилеров</h3>
+          <p data-i18n="s1.d">Германия, Нидерланды, Бельгия и вся Европа — под ключ</p>
+        </div>
+        <span class="svc__arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8"/></svg></span>
+      </a>
+      <a href="#selection" class="svc reveal" style="--img:url('https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=900&q=70')">
+        <span class="svc__num">02</span>
+        <div class="svc__body">
+          <h3 data-i18n="s2.t">Автоподбор по Польше</h3>
+          <p data-i18n="s2.d">Контакт проверенного автоподборщика</p>
+        </div>
+        <span class="svc__arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8"/></svg></span>
+      </a>
+      <a href="#prices" class="svc reveal" style="--img:url('https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?auto=format&fit=crop&w=900&q=70')">
+        <span class="svc__num">03</span>
+        <div class="svc__body">
+          <h3 data-i18n="s3.t">Прохождение техосмотра</h3>
+          <p data-i18n="s3.d">Наша услуга — 250 zł</p>
+        </div>
+        <span class="svc__arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8"/></svg></span>
+      </a>
+      <a href="#registration" class="svc reveal" style="--img:url('https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=900&q=70')">
+        <span class="svc__num">04</span>
+        <div class="svc__body">
+          <h3 data-i18n="s4.t">Получение номеров</h3>
+          <p data-i18n="s4.d">Только Варшава · от 400 zł</p>
+        </div>
+        <span class="svc__arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8"/></svg></span>
+      </a>
+      <a href="#delivery" class="svc reveal" style="--img:url('https://images.unsplash.com/photo-1519003722824-194d4455a60c?auto=format&fit=crop&w=900&q=70')">
+        <span class="svc__num">05</span>
+        <div class="svc__body">
+          <h3 data-i18n="s5.t">Доставка по Европе</h3>
+          <p data-i18n="s5.d">Все направления, застрахованные автовозы</p>
+        </div>
+        <span class="svc__arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8"/></svg></span>
+      </a>
+      <a href="#insurance" class="svc svc--wide reveal" style="--img:url('https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?auto=format&fit=crop&w=1200&q=70')">
+        <span class="svc__num">06</span>
+        <div class="svc__body">
+          <h3 data-i18n="s6.t">Страхование авто</h3>
+          <p data-i18n="s6.d">Мультиагент в 6 крупнейших страховых Польши</p>
+        </div>
+        <span class="svc__arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8"/></svg></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ EUROPE ============ -->
+<section class="section section--tint" id="europe">
+  <div class="container europe">
+    <div class="europe__text reveal">
+      <span class="kicker" data-i18n="eu.kicker">Покупка автомобилей от европейских дилеров</span>
+      <h2 class="h2" data-i18n="eu.title">Немного цифр</h2>
+      <p data-i18n="eu.p1">По статистике за 2025 год каждый второй автомобиль стоимостью дороже 50 000 злотых, поставленный на учёт в Польше, был привезён из другой страны ЕС. В первую очередь — из Германии, Нидерландов и Бельгии. Всего было ввезено более 900 000 авто.</p>
+      <p data-i18n="eu.p2">То есть сами поляки рассматривают европейские автомобили с не меньшим интересом, чем местные. Размер только немецкого рынка в 7 раз больше польского.</p>
+      <p data-i18n="eu.p3">Даже с учётом стоимости доставки, местного акциза и стоимости наших услуг цена понятного автомобиля с прозрачной историей будет по низу польского рынка, а может — и с некоторым дисконтом к нему. Всё зависит от конкретной машины.</p>
+      <p class="callout" data-i18n="eu.p4">Мы с удовольствием подберём вам автомобиль от европейского дилера. Оставляйте заявку и узнайте, во сколько обойдётся машина вашей мечты под ключ.</p>
+      <a href="#contact" class="btn btn--primary btn--lg" data-service="europe"><span data-i18n="hero.cta1">Узнать цену под ключ</span>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </div>
+
+    <div class="europe__visual reveal">
+      <div class="formula">
+        <p class="formula__label" data-i18n="eu.f.label">Из чего складывается цена под ключ</p>
+        <div class="formula__row">
+          <div class="fx"><span class="fx__ico">
+            <svg viewBox="0 0 24 24"><path d="M3 13l2-5a2 2 0 0 1 2-1.3h10A2 2 0 0 1 19 8l2 5v4a1 1 0 0 1-1 1h-1.5M3 13v4a1 1 0 0 0 1 1h1.5M3 13h18M8.5 18h7"/><circle cx="7" cy="18" r="1.8"/><circle cx="17" cy="18" r="1.8"/></svg></span>
+            <b data-i18n="eu.f.car">Автомобиль</b><small data-i18n="eu.f.carD">от европейского дилера</small></div>
+          <span class="fx__op">+</span>
+          <div class="fx"><span class="fx__ico">
+            <svg viewBox="0 0 24 24"><path d="M2 16V7h11v9M13 10h4l3 3v3h-7M2 16h1.5M8.5 16h6M19 16h1"/><circle cx="6" cy="17" r="1.8"/><circle cx="17" cy="17" r="1.8"/></svg></span>
+            <b data-i18n="eu.f.del">Доставка</b><small data-i18n="eu.f.delD">автовозом в Польшу</small></div>
+          <span class="fx__op">+</span>
+          <div class="fx"><span class="fx__ico">
+            <svg viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6zM15 3v4h4M9 12h7M9 16h5"/></svg></span>
+            <b data-i18n="eu.f.tax">Акциз</b><small data-i18n="eu.f.taxD">польский</small></div>
+          <span class="fx__op">+</span>
+          <div class="fx"><span class="fx__ico">
+            <svg viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 5-3 8.5-7 10-4-1.5-7-5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg></span>
+            <b data-i18n="eu.f.svc">Наши услуги</b><small data-i18n="eu.f.svcD">сопровождение</small></div>
+        </div>
+        <div class="formula__result">
+          <span>=</span>
+          <div>
+            <b data-i18n="eu.f.res">Цена по низу польского рынка</b>
+            <small data-i18n="eu.f.resD">а иногда — с дисконтом к нему</small>
+          </div>
+        </div>
+      </div>
+
+      <div class="mini-stats">
+        <div class="mini"><b>1/2</b><span data-i18n="eu.m1">авто дороже 50 000 zł — из ЕС</span><em>01</em></div>
+        <div class="mini"><b>900k+</b><span data-i18n="eu.m2">ввезено за 2025 год</span><em>02</em></div>
+        <div class="mini"><b>×7</b><span data-i18n="eu.m3">рынок Германии vs Польши</span><em>03</em></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WHY ============ -->
+<section class="section">
+  <div class="container">
+    <div class="section__head reveal">
+      <span class="kicker" data-i18n="why.kicker">Преимущества</span>
+      <h2 class="h2" data-i18n="why.title">Почему DaAuto</h2>
+    </div>
+    <div class="why">
+      <div class="why__item reveal">
+        <span class="why__ico"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l5 5M8.5 11l2 2 3.5-3.5"/></svg></span>
+        <h3 data-i18n="w1.t">Прозрачная история</h3>
+        <p data-i18n="w1.d">Понятные автомобили от европейских дилеров — без сюрпризов после покупки.</p>
+        <em>01</em>
+      </div>
+      <div class="why__item reveal">
+        <span class="why__ico"><svg viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8M15 7h6v6"/></svg></span>
+        <h3 data-i18n="w2.t">Цена по низу рынка</h3>
+        <p data-i18n="w2.d">Даже с доставкой, акцизом и нашими услугами.</p>
+        <em>02</em>
+      </div>
+      <div class="why__item reveal">
+        <span class="why__ico"><svg viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/><path d="M8 10h8M8 13h5"/></svg></span>
+        <h3 data-i18n="w3.t">На родном языке</h3>
+        <p data-i18n="w3.d">Говорим по-русски и по-польски, ходим за вас в ужонд и помогаем в сложных ситуациях.</p>
+        <em>03</em>
+      </div>
+      <div class="why__item reveal">
+        <span class="why__ico"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7.5" height="7.5" rx="2"/><rect x="13.5" y="3" width="7.5" height="7.5" rx="2"/><rect x="3" y="13.5" width="7.5" height="7.5" rx="2"/><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="2"/></svg></span>
+        <h3 data-i18n="w4.t">Всё в одном месте</h3>
+        <p data-i18n="w4.d">Покупка, доставка, техосмотр, номера и страховка — одна команда.</p>
+        <em>04</em>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SELECTION ============ -->
+<section class="section section--tint" id="selection">
+  <div class="container selection">
+    <div class="selection__left reveal">
+      <span class="kicker" data-i18n="sel.kicker">Автоподбор по Польше</span>
+      <h2 class="h2" data-i18n="sel.title">Требования к авто</h2>
+      <div class="reqs">
+        <div class="req"><b data-i18n="sel.r1b">≤ 10 лет</b><span data-i18n="sel.r1">автомобили не старше 10 лет</span></div>
+        <div class="req"><b>40 000 zł</b><span data-i18n="sel.r2">не дешевле 40 000 злотых</span></div>
+      </div>
+    </div>
+    <div class="selection__right reveal">
+      <p class="lead" data-i18n="sel.p1">На самом деле мы не занимаемся автоподбором, но предоставим вам контакт автоподборщика, в котором уверены так же, как в себе.</p>
+      <p data-i18n="sel.p2">А в качестве альтернативы предложим вам сэкономить и приобрести автомобиль с одного из европейских аукционов.</p>
+      <div class="opts">
+        <div class="opt">
+          <span class="opt__tag" data-i18n="sel.o1tag">Вариант 1</span>
+          <h3 data-i18n="sel.o1">Проверенный автоподборщик</h3>
+          <p data-i18n="sel.o1d">Контакт специалиста, которому мы доверяем как себе</p>
+        </div>
+        <div class="opt opt--hot">
+          <span class="opt__tag" data-i18n="sel.o2tag">Вариант 2 · экономия</span>
+          <h3 data-i18n="sel.o2">Европейский аукцион</h3>
+          <p data-i18n="sel.o2d">Приобретение автомобиля с одного из аукционов ЕС</p>
+        </div>
+      </div>
+      <a href="#contact" class="btn btn--primary" data-service="selection" data-i18n="sel.cta">Получить контакт</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PRICES ============ -->
+<section class="section" id="prices">
+  <div class="container">
+    <div class="section__head reveal">
+      <span class="kicker" data-i18n="pr.kicker">Фиксированные цены</span>
+      <h2 class="h2" data-i18n="pr.title">Техосмотр и регистрация</h2>
+      <p class="section__sub" data-i18n="pr.sub">Понятная стоимость без скрытых платежей</p>
+    </div>
+
+    <div class="prices">
+      <article class="price reveal">
+        <div class="price__head">
+          <span class="price__ico"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.8-.7-.7-2.8z"/></svg></span>
+          <h3 data-i18n="pr.t.title">Прохождение техосмотра</h3>
+        </div>
+        <div class="price__big"><span>250</span> zł <small data-i18n="pr.t.big">наша услуга</small></div>
+        <ul class="rows">
+          <li><span data-i18n="pr.t.r1">Наша услуга</span><b>250 zł</b></li>
+          <li><span data-i18n="pr.t.r2">Сам техосмотр</span><b data-i18n="pr.t.r2v">по тарифу станции</b></li>
+          <li><span data-i18n="pr.t.r3">Повторный заезд в случае выявления недостатков</span><b>150 zł</b></li>
+        </ul>
+        <a href="#contact" class="btn btn--outline btn--block" data-service="inspection" data-i18n="pr.cta">Записаться</a>
+      </article>
+
+      <article class="price price--featured reveal" id="registration">
+        <span class="price__flag" data-i18n="pr.r.flag">Только Варшава</span>
+        <div class="price__head">
+          <span class="price__ico"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="10" rx="2"/><path d="M5 7v10M7.5 12h3M13 12h6"/></svg></span>
+          <h3 data-i18n="pr.r.title">Получение номеров</h3>
+        </div>
+        <p class="price__if" data-i18n="pr.r.if">Если вы:</p>
+        <ul class="checks">
+          <li data-i18n="pr.r.c1">экономите своё время</li>
+          <li data-i18n="pr.r.c2">не уверены в своём уровне польского</li>
+          <li data-i18n="pr.r.c3">сомневаетесь, насколько полный комплект документов у вас на руках</li>
+        </ul>
+        <p class="price__text" data-i18n="pr.r.p">— обращайтесь к нам за регистрацией автомобиля. Оформим доверенность и сходим за вас в ужонд (urząd). Поможем заранее проверить, достаточно ли у вас документов и верно ли они оформлены.</p>
+        <ul class="rows">
+          <li><span data-i18n="pr.r.r1">Регистрация автомобиля</span><b>400 zł</b></li>
+          <li><span data-i18n="pr.r.r2">Получение номеров + оплата польского акциза</span><b>500 zł</b></li>
+        </ul>
+        <a href="#contact" class="btn btn--accent btn--block" data-service="registration" data-i18n="pr.cta2">Оформить регистрацию</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DELIVERY ============ -->
+<section class="section section--dark" id="delivery">
+  <div class="container delivery">
+    <div class="delivery__text reveal">
+      <span class="kicker kicker--light" data-i18n="d.kicker">Доставка автомобилей по Европе</span>
+      <h2 class="h2" data-i18n="d.title">Все направления</h2>
+      <div class="dirs">
+        <span data-i18n="d.dir1">ЕС → Польша</span>
+        <span data-i18n="d.dir2">Польша → Европа</span>
+      </div>
+      <p data-i18n="d.p1">Если вам нужно привезти машину из любой страны ЕС в Польшу или, наоборот, вы хотите «прокатить свою ласточку» на автовозе из Польши в Европу, чтобы не наматывать пробег, — обращайтесь.</p>
+      <ul class="feats">
+        <li><span class="feats__ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></svg></span>
+          <div><b data-i18n="d.f1">Подключены к логистическим биржам</b><span data-i18n="d.f1d">Видим актуальные предложения перевозчиков по всей Европе</span></div></li>
+        <li><span class="feats__ico"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.8-3.5 3.3-5.5 6.5-5.5s5.7 2 6.5 5.5M16 4.5a3.5 3.5 0 0 1 0 7M18 14.8c2 .7 3.2 2.5 3.5 5.2"/></svg></span>
+          <div><b data-i18n="d.f2">Многих перевозчиков знаем лично</b><span data-i18n="d.f2d">Видим, как о них отзываются и как давно они на рынке</span></div></li>
+        <li><span class="feats__ico"><svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></span>
+          <div><b data-i18n="d.f3">Понимаем ценообразование</b><span data-i18n="d.f3d">Знаем, из чего складывается стоимость перевозки</span></div></li>
+      </ul>
+      <div class="ps">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 5-3 8.5-7 10-4-1.5-7-5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg>
+        <p data-i18n="d.ps"><b>P.S.</b> Все автовозы застрахованы. Мы за этим следим.</p>
+      </div>
+      <a href="#contact" class="btn btn--accent btn--lg" data-service="delivery" data-i18n="d.cta">Рассчитать доставку</a>
+    </div>
+
+    <div class="routes reveal" aria-hidden="true">
+      <svg viewBox="0 0 520 420">
+        <defs>
+          <radialGradient id="glow"><stop offset="0" stop-color="#FF5A1F" stop-opacity=".6"/><stop offset="1" stop-color="#FF5A1F" stop-opacity="0"/></radialGradient>
+          <pattern id="dots" width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.2" fill="#ffffff" opacity=".09"/></pattern>
+        </defs>
+        <rect width="520" height="420" fill="url(#dots)"/>
+        <!-- routes -->
+        <path id="r1" class="route" d="M120 130 C 220 80, 330 100, 420 160"/>
+        <path id="r2" class="route" d="M95 190 C 200 170, 320 170, 420 160"/>
+        <path id="r3" class="route" d="M270 130 C 330 120, 380 135, 420 160"/>
+        <path id="r4" class="route" d="M255 275 C 320 250, 380 210, 420 160"/>
+        <path id="r5" class="route" d="M45 270 C 170 300, 330 250, 420 160"/>
+        <path id="r6" class="route" d="M210 360 C 290 330, 380 250, 420 160"/>
+        <!-- moving cars -->
+        <circle r="5" class="car"><animateMotion dur="4s" repeatCount="indefinite"><mpath href="#r1"/></animateMotion></circle>
+        <circle r="5" class="car"><animateMotion dur="5s" begin="-1.3s" repeatCount="indefinite"><mpath href="#r2"/></animateMotion></circle>
+        <circle r="5" class="car"><animateMotion dur="3s" begin="-.7s" repeatCount="indefinite"><mpath href="#r3"/></animateMotion></circle>
+        <circle r="5" class="car"><animateMotion dur="4.4s" begin="-2s" repeatCount="indefinite"><mpath href="#r4"/></animateMotion></circle>
+        <circle r="5" class="car"><animateMotion dur="6s" begin="-3s" repeatCount="indefinite"><mpath href="#r5"/></animateMotion></circle>
+        <circle r="5" class="car"><animateMotion dur="5.4s" begin="-.4s" repeatCount="indefinite"><mpath href="#r6"/></animateMotion></circle>
+        <!-- cities -->
+        <g class="city"><circle cx="120" cy="130" r="5"/><text x="120" y="114" data-i18n="city.ams">Амстердам</text></g>
+        <g class="city"><circle cx="95" cy="190" r="5"/><text x="95" y="212" data-i18n="city.bru">Брюссель</text></g>
+        <g class="city"><circle cx="270" cy="130" r="5"/><text x="270" y="114" data-i18n="city.ber">Берлин</text></g>
+        <g class="city"><circle cx="255" cy="275" r="5"/><text x="255" y="298" data-i18n="city.mun">Мюнхен</text></g>
+        <g class="city"><circle cx="45" cy="270" r="5"/><text x="58" y="292" data-i18n="city.par">Париж</text></g>
+        <g class="city"><circle cx="210" cy="360" r="5"/><text x="210" y="384" data-i18n="city.mil">Милан</text></g>
+        <circle cx="420" cy="160" r="46" fill="url(#glow)" class="pulse"/>
+        <g class="city city--main"><circle cx="420" cy="160" r="9"/><text x="420" y="196" data-i18n="city.waw">Варшава</text></g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ============ INSURANCE ============ -->
+<section class="section" id="insurance">
+  <div class="container insurance">
+    <div class="insurance__intro reveal">
+      <span class="kicker" data-i18n="i.kicker">Страхование авто</span>
+      <h2 class="h2" data-i18n="i.title">Подберём для вас лучший тариф</h2>
+      <p class="lead" data-i18n="i.lead">Один из наших сотрудников — мультиагент в шести крупнейших страховых компаниях Польши.</p>
+      <p data-i18n="i.p">Если вы покупаете свой первый автомобиль в Польше, то, скорее всего, не знаете, что тарифы на один и тот же автомобиль в разных страховых могут отличаться в несколько раз. Мы сами видели примеры, когда разница в стоимости страховки была больше чем в 10 раз.</p>
+      <div class="ins-nums">
+        <div><b><span data-count="6">0</span></b><span data-i18n="i.n1">крупнейших страховых Польши</span></div>
+        <div><b>&gt;<span data-count="10">0</span>×</b><span data-i18n="i.n2">разница в цене за тот же автомобиль</span></div>
+      </div>
+    </div>
+
+    <div class="know reveal">
+      <h3 data-i18n="i.know">Что нужно знать</h3>
+      <ol>
+        <li><span>01</span><p data-i18n="i.k1">Стоимость страховки у независимого агента и в офисе страховой абсолютно идентична — во всех страховых компаниях.</p></li>
+        <li><span>02</span><p data-i18n="i.k2">Вы получите поддержку в сложных ситуациях на родном языке.</p></li>
+        <li><span>03</span><p data-i18n="i.k3">Поможем максимизировать выплату при наступлении страхового случая — чего точно не стоит ждать от сотрудников колл-центров самих страховых.</p></li>
+        <li class="bonus"><span>+</span><p data-i18n="i.k4">приятные бонусы</p></li>
+      </ol>
+      <a href="#contact" class="btn btn--primary btn--block" data-service="insurance" data-i18n="i.cta">Подобрать страховку</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section class="section section--tint" id="contact">
+  <div class="container contact">
+    <div class="contact__info reveal">
+      <span class="kicker" data-i18n="c.kicker">Контакты</span>
+      <h2 class="h2" data-i18n="c.title">Оставьте заявку</h2>
+      <p class="lead" data-i18n="c.sub">Расскажите, какой автомобиль или услуга вам нужны — мы рассчитаем стоимость и свяжемся с вами.</p>
+      <ul class="contacts">
+        <li><span class="contacts__ico"><svg viewBox="0 0 24 24"><path d="M5 3h4l2 5-2.5 1.5a11 11 0 0 0 6 6L16 13l5 2v4a2 2 0 0 1-2 2A17 17 0 0 1 3 5a2 2 0 0 1 2-2"/></svg></span>
+          <div><small data-i18n="c.phone">Телефон</small><a href="tel:+48000000000">+48 000 000 000</a></div></li>
+        <li><span class="contacts__ico"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></span>
+          <div><small>Email</small><a href="mailto:kontakt@daauto.pl">kontakt@daauto.pl</a></div></li>
+        <li><span class="contacts__ico"><svg viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg></span>
+          <div><small data-i18n="c.city">Адрес</small><a href="https://maps.app.goo.gl/ZqGJhfidLF97GR6c6" target="_blank" rel="noopener" data-i18n="c.cityV">ul. Landwarowska 2, Варшава</a></div></li>
+      </ul>
+      <div class="socials">
+        <a href="#" aria-label="Telegram"><svg viewBox="0 0 24 24"><path d="M21 4L3 11l6 2 2 6 3-4 5 4z M9 13l8-6"/></svg></a>
+        <a href="#" aria-label="WhatsApp"><svg viewBox="0 0 24 24"><path d="M4 20l1.3-4A8 8 0 1 1 8 18.7z"/><path d="M9 9c0 3 3 6 6 6l1-1.5-2-1-1 .8c-1-.5-2-1.5-2.5-2.5l.8-1-1-2z"/></svg></a>
+        <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".8"/></svg></a>
+      </div>
+    </div>
+
+    <form class="card-form card-form--blue reveal" data-form novalidate>
+      <label class="field">
+        <span data-i18n="form.name">Имя</span>
+        <input type="text" name="name" required autocomplete="name" data-i18n-ph="form.namePh" placeholder="Иван">
+      </label>
+      <label class="field">
+        <span data-i18n="form.phone">Телефон</span>
+        <input type="tel" name="phone" required autocomplete="tel" placeholder="+48 ___ ___ ___">
+      </label>
+      <div class="field-row">
+        <label class="field">
+          <span data-i18n="form.service">Услуга</span>
+          <select name="service" id="contactService">
+            <option value="europe" data-i18n="opt.europe">Покупка авто у европейского дилера</option>
+            <option value="selection" data-i18n="opt.selection">Автоподбор по Польше</option>
+            <option value="inspection" data-i18n="opt.inspection">Техосмотр</option>
+            <option value="registration" data-i18n="opt.registration">Регистрация и номера (Варшава)</option>
+            <option value="delivery" data-i18n="opt.delivery">Доставка по Европе</option>
+            <option value="insurance" data-i18n="opt.insurance">Страхование</option>
+          </select>
+        </label>
+        <label class="field">
+          <span data-i18n="form.lang">Язык общения</span>
+          <select name="language">
+            <option value="ru">Русский</option>
+            <option value="pl">Polski</option>
+          </select>
+        </label>
+      </div>
+      <label class="field">
+        <span data-i18n="form.msg">Комментарий</span>
+        <textarea name="message" rows="3" data-i18n-ph="form.msgPh" placeholder="Марка, модель, бюджет, сроки…"></textarea>
+      </label>
+      <label class="hp" aria-hidden="true">Website<input type="text" name="website" tabindex="-1" autocomplete="off"></label>
+      <button class="btn btn--dark btn--block" type="submit" data-i18n="form.submit">Отправить заявку</button>
+      <p class="card-form__note" data-i18n="form.consent">Отправляя форму, вы соглашаетесь на обработку персональных данных и обратную связь.</p>
+      <div class="card-form__ok" role="status">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
+        <p data-i18n="form.ok">Спасибо! Мы свяжемся с вами в ближайшее время.</p>
+      </div>
+    </form>
+  </div>
+
+  <div class="container">
+    <div class="map reveal">
+      <div class="map__view">
+        <iframe class="map__frame" title="DaAuto — ul. Landwarowska 2, Warszawa" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+          src="https://www.google.com/maps?q=Landwarowska+2,+Warszawa&amp;z=16&amp;hl=ru&amp;output=embed" allowfullscreen></iframe>
+      </div>
+      <div class="map__card">
+        <span class="map__pin"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg></span>
+        <div>
+          <small data-i18n="map.label">Наш адрес</small>
+          <b>ul. Landwarowska 2</b>
+          <span data-i18n="map.city">03-107 Варшава, Польша</span>
+        </div>
+        <div class="map__btns">
+          <a class="btn btn--primary btn--sm" href="https://www.google.com/maps/dir/?api=1&amp;destination=Landwarowska+2,+Warszawa" target="_blank" rel="noopener" data-i18n="map.route">Проложить маршрут</a>
+          <a class="btn btn--outline btn--sm" href="https://maps.app.goo.gl/ZqGJhfidLF97GR6c6" target="_blank" rel="noopener" data-i18n="map.open">Открыть в Google Картах</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="container footer__inner">
+    <a href="#top" class="logo logo--light" aria-label="DaAuto">
+      <svg class="logo__mark" viewBox="0 0 64 64" aria-hidden="true">
+        <rect width="64" height="64" rx="14" fill="#1E5BFF"/>
+        <path d="M22 16h10c10 0 17 6.5 17 16s-7 16-17 16H22z" fill="none" stroke="#fff" stroke-width="6"/>
+        <path d="M8 26h9M5 34h12M10 42h7" stroke="#FF5A1F" stroke-width="4" stroke-linecap="round"/>
+      </svg>
+      <span class="logo__text"><b>Da</b>Auto</span>
+    </a>
+    <nav class="footer__nav">
+      <a href="#services" data-i18n="nav.services">Услуги</a>
+      <a href="#europe" data-i18n="nav.europe">Авто из ЕС</a>
+      <a href="#prices" data-i18n="nav.prices">Цены</a>
+      <a href="#delivery" data-i18n="nav.delivery">Доставка</a>
+      <a href="#insurance" data-i18n="nav.insurance">Страхование</a>
+      <a href="#contact" data-i18n="nav.contact">Контакты</a>
+    </nav>
+    <p class="footer__copy">© <span id="year">2026</span> DaAuto · <span data-i18n="f.tag">Автомобили из Европы под ключ</span> · <a href="#" data-i18n="f.privacy">Политика конфиденциальности</a></p>
+  </div>
+</footer>
+
+<a href="#contact" class="fab" data-i18n="cta.request">Оставить заявку</a>
+
+<script src="script.js"></script>
+</body>
+</html>

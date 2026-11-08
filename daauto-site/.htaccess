@@ -1,0 +1,4 @@
+# Закрываем служебные файлы от прямого открытия в браузере
+<FilesMatch "^(config(\.example)?\.php|README\.md)$">
+  Require all denied
+</FilesMatch>
